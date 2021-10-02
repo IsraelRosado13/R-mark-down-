@@ -1,0 +1,84 @@
+---
+title: "Distribución de probabilidad"
+author: "Lizeth Gabriela Rodriguez"
+date: "4/5/2021"
+output: html_document
+---
+
+**Es una lista que nos proporciona todos los resultados de los valores que pueden presentarse en un acontecimiento**, junto con la probabilidad de ocurrencia asociada a cada uno de estos valores. Hay 2 tipos de distribuciones:
+
+| Distribución discreta       | Distribución continua      |
+|-----------------------------|----------------------------|
+| **Distribución binomial**   | **Distribución t student** |
+| **Distribución de poisson** | **Distribución normal**    |
+
+## 1. Distribución discreta
+
+### 1.1.Distribución binomial
+
+Fue propuesta por Jakob Bernoulli (1654-1705), y es utilizada con acontecimientos que tengan respuesta binaria, generalmente clasificada como "éxito" o "fracaso". Se presenta con mucha frecuencia en nuestra vida cotidiana.
+
+Su formula es:
+
+$P(X)= C^n * π^x * (1-π)^n-x$
+
+Donde: C es la combinatoria, n equivale al número de ensayo, x será el número de éxitos y π equivale a la probabilidad de éxito.
+
+Gráficamente se representa de la siguiente forma.
+
+```{r}
+h=rep(NA,50)
+for(i in 1:50){
+  set.seed(i)
+  ISA=rnorm(1000, 17.185, 1.846)
+  beta1=rnorm(1000,0.032,0.0030)
+  beta=runif(1000,580.8,580.9)
+ 
+  COLCAP=beta+beta1*ISA
+  
+ 
+  datos=data.frame(COLCAP,ISA)
+  head(datos)
+  datos1=datos[sample(nrow(datos), 10), ]
+  modelo1=lm(datos1$COLCAP~datos1$ISA)
+  vec=as.vector(coef(modelo1))
+  h[[i]]=vec[2] 
+}
+
+mean(h)
+desv=sqrt(var(h))
+
+hist(COLCAP)
+```
+
+*Los datos del histograma fueron sacados de una base de datos personal del autor.*
+
+### 1.2 Distribución de poisson
+
+Recibe su nombre gracias al matemático francés Simeón Denis Poisson (1781-1840). Describe el número de veces que se presenta un acontecimiento durante un intervalo específico, este intervalo puede ser de tiempo, distancia, área o volumen. La probabilidad de ocurrencia es proporcional a la longitud del interval.
+
+Para la distribución se utiliza la fórmula: $P(X=x)=\frac{e^λ * λ^x}{x!}$
+
+En donde P(X=x) es la probabilidad de ocurrencia cuando la variable discreta X toma un valor finito x; e tiene un valor aproximado de 2,718, x equivale al numero de ocurrencias y λ equivale al promedio de ocurrencias de un intervalo.
+
+La distribución de poisson se grafica de la siguiente manera:
+
+![](C:/Users/Admin/Desktop/4888c799-0a1e-49af-bb5d-90f72fc9af50.jpg){width="426"}
+
+## 2.Distribución continua
+
+### 2.1Distribuciónt student
+
+La distribución t de Student o distribución t es un modelo teórico utilizado para aproximar el momento de primer orden de una **Población** normalmente distribuida cuando el tamaño de la **Muestra** es pequeño y se desconoce la desviación típica, cuya formula es: $t=\frac{\hat{x}-μ}{(\frac{s}{√n})}$
+
+Donde µ equivale a la media de la población, representa la media de la distribución de los datos, n es el tamaño de la muestra y S será el error estandar de la muestra.
+
+La distribución estandar se puede graficar de la siguente manera:
+
+![](C:/Users/Admin/Desktop/bcf108bd-9001-4eb0-b45a-8b61adcd7310.jpg)
+
+### **2.2 Distribución Normal**
+
+La distribución de probabilidad normal es una de las más importantes en estadística y en el cálculo de probabilidades. Fue utilizada por Carl Friedich Gauss (1777-1855) al escribir un libro sobre el movimiento de los cuerpos celestes, por este motivo también es conocida como distribución Gaussiana. Es importante debido a que el teorema central del límite implica que esta distribución es casi universal y tiene forma de campana.
+
+![](C:/Users/Admin/Desktop/cdd1b64f-ff4b-4c3f-b17e-b9179bf9acc3.jpg){width="494"}
