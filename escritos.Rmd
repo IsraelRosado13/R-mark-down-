@@ -1,0 +1,40 @@
+---
+title: "Como realizar un documento en R"
+author: "Israel Rosado"
+date: "4/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ¿Qué es R?
+
+Bueno en primera instancia tenemos que conocer que es R, R es un lenguaje de programación usado para el análisis, manejo y tramite de ciencias de datos, este lenguaje es muy reconocido por los economistas, no quiere decir que ellos sean los únicos en usarlo, pero si es una herramienta esencial para ellos
+
+### ¿Cómo incluir codigos de R?
+
+Para esto lo que se usa son las (```) para indicar que se va a utilizar un lenguaje de programación en dicho texto, luego se abren ({}) y se indica que lenguaje se va a usar y por ultimo abajo de este se escribe el código que se va a agregar
+
+```{r}
+library(readxl)
+respuestas_supermercados <- read_excel("C:/Users/Admin/Desktop/ISRR/universidad trabajos/5 QUINTO SEMESTRE/Econometria 2/segundo corte/trabajo final/respuestas  supermercados.xlsx")
+smer=respuestas_supermercados
+attach(smer)
+estudios=as.factor(Estudios)
+plot(estudios)
+```
+
+En este caso se incluyó una gráfica sobre un documento realizado anteriormente en clase para un trabajo final, esta base de datos fue recolectada por el mismo autor.
+
+
+#### No solo se pueden agregar gráficas, también se pueden agregar tablas, matrices, etc. 
+```{r}
+library(readxl)
+respuestas_supermercados <- read_excel("C:/Users/Admin/Desktop/ISRR/universidad trabajos/5 QUINTO SEMESTRE/Econometria 2/segundo corte/trabajo final/respuestas  supermercados.xlsx")
+smer=respuestas_supermercados
+table(Estrato)
+
+```
+La tabla antes expuesta, muestra la cantidad de personas encuestadas por cada estrato socioeconómico
